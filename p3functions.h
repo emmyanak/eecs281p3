@@ -82,22 +82,6 @@ return (100000000*month + 1000000*day + 10000*hour + 100*min + sec);
 bool timestamp_compare(const Entry &entry1, const Entry &entry2) //return true if entry 2 higher than entry 1
 
 {
-	/*
-	
-   string tstr_1 = entry1.tstamp;
-   string tstr_2 = entry2.tstamp;
-   
-   tstr_1.erase(std::remove(tstr_1.begin(), tstr_1.end(), ':'), tstr_1.end());
-   tstr_2.erase(std::remove(tstr_2.begin(), tstr_2.end(), ':'), tstr_2.end());
-   */
-   /*
-   cout << tstr_1 << endl;  
-   cout << tstr_2 << endl; 
-   */
-   /*
-   unsigned long int timestamp1 = std::stol(tstr_1);
-   unsigned long int timestamp2 = std::stol(tstr_2);
-    */
 
    if (entry1.tstamp == entry2.tstamp)
    {
@@ -116,28 +100,18 @@ bool timestamp_compare(const Entry &entry1, const Entry &entry2) //return true i
 long int timestamp_search(string t1, string t2, vector<Entry> &v, vector<Entry>::iterator &low_it, vector<Entry>::iterator &high_it) //would be much faster on a sorted vector
 {
 
-//cout << "TIMESTAMP SEARCH CALLED " << endl; 
+ 
    long long int time_low = timestamp_converter(t1);
    long long int time_high = timestamp_converter(t2);
    
    vector<Entry>::iterator vector_iterator;
 
-   /*
-   t1.erase(std::remove(t1.begin(), t1.end(), ':'), t1.end());
-   t2.erase(std::remove(t2.begin(), t2.end(), ':'), t2.end());
-   
 
-   unsigned long int timestamp1 = stol(t1);
-   unsigned long int timestamp2 = stol(t2);
-   unsigned long int entry_timestamp = 0; 
-   string string_tstamp = "whatever";
-   */
-   
    Entry dummy;
    dummy.tstamp =  time_low; 
    low_it = lower_bound(v.begin(), v.end(), dummy, timestamp_compare);
    dummy.tstamp = time_high;
-   high_it = lower_bound(v.begin(), v.end(), dummy, timestamp_compare); //maybe change this to lower bound also 
+   high_it = lower_bound(v.begin(), v.end(), dummy, timestamp_compare);
   
    //cout << "TIMESTAMP SEARCH ENDED" << endl;
    return high_it-low_it; 
@@ -443,43 +417,5 @@ void print_excerpt(ostream& ss, vector<int> &excerpt, vector<Entry> &entries)
     }
 	return;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
